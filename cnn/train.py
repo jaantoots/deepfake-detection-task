@@ -229,7 +229,7 @@ def main():
         args.data_root,
         tf=transforms.Compose(
             [
-                transforms.RandomResizedCrop((224, 224)),
+                transforms.Resize((224, 224)),
                 transforms.ToTensor(),
                 # Use ImageNet normalization
                 transforms.Normalize(
