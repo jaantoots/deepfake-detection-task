@@ -23,7 +23,6 @@ LOGGING = {
     "disable_existing_loggers": False,
 }
 DATA_ROOT = "../../data_train_wild_400"
-AVG_STEPS = 100
 NUM_EPOCHS = 10
 BATCH_SIZE = 64
 LR = 0.0004

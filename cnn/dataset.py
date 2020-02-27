@@ -57,3 +57,16 @@ class Faces(data.Dataset):
         fmt_str += f"    Number of fake: {len([x for _, x in self.data if x == 1])}\n"
         fmt_str += f"    Root location: {self.root}"
         return fmt_str
+
+
+class MiniFaces(Faces):
+    """Smaller dataset of faces"""
+
+    def _files(self):
+        for split in self.split.value:
+            for name, label in (("real", 0), ("fake", 1)):
+                for i, filename in enumerate(
+                    glob.glob(str(self.root / split / name / "*.jpg"))
+                ):
+                    if i % 10 == 0:
+                        yield filename, label

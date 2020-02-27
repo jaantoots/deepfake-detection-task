@@ -18,7 +18,7 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 
 import config
-from dataset import Faces, Split
+from dataset import Faces, MiniFaces, Split
 from model import resnext50_32x4d
 from utils import progress
 
@@ -212,16 +212,20 @@ def main():
         "-m", "--momentum", type=float, default=config.MOMENTUM, help="Momentum",
     )
     parser.add_argument(
+        "-d", "--decay-scale", type=int, help="Learning rate decay scale"
+    )
+    parser.add_argument(
         "--data-root", default=config.DATA_ROOT, help="Dataset root directory"
     )
     parser.add_argument(
-        "-d", "--decay-scale", type=int, help="Learning rate decay scale"
+        "-s", "--small", action="store_true", help="Use smaller dataset for testing",
     )
     args = parser.parse_args()
     cuda = not args.disable_cuda
+    dataset = Faces if not args.small else MiniFaces
     loop = Loop.from_args(args, cuda=cuda)
 
-    train_dataset = Faces(
+    train_dataset = dataset(
         args.data_root,
         tf=transforms.Compose(
             [
@@ -245,7 +249,7 @@ def main():
     )
     click.secho("Training dataset:", fg="green", bold=True)
     click.echo(train_loader.dataset)
-    val_dataset = Faces(
+    val_dataset = dataset(
         args.data_root,
         tf=transforms.Compose(
             [
