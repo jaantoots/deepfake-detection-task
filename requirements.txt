@@ -1,0 +1,5 @@
+click
+Pillow
+sklearn
+torch
+torchvision
