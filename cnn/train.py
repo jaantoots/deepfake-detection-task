@@ -257,7 +257,7 @@ def main():
                 ),
             ]
         ),
-        split=Split.VAL,
+        split=Split.TVAL,
     )
     val_loader = DataLoader(
         val_dataset,

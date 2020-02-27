@@ -15,6 +15,8 @@ class Split(Enum):
 
     TRAIN = ("train",)
     VAL = ("val",)
+    TEST = ("test",)
+    TVAL = ("val", "test")
 
 
 class Faces(data.Dataset):
