@@ -11,7 +11,7 @@ LR = 0
 
 for z in range(num):
     # read python dict back from the file
-    pkl_file = open("croppedDeepFake_1000.pkl", "rb")
+    pkl_file = open("features.pkl", "rb")
 
     data = pickle.load(pkl_file)
     pkl_file.close()
